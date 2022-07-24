@@ -1,0 +1,31 @@
+﻿<mahApps:MetroWindow x:Class="DrumTrainer.MetronomeSettingsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mahApps="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DrumTrainer"
+        ShowInTaskbar="False"
+        ShowMaxRestoreButton="False"
+        WindowStartupLocation="CenterOwner"
+        ShowMinButton="False"
+        mc:Ignorable="d"
+        Title="Metronome instellingen" Height="100" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Tick geluid"/>
+        <ComboBox Grid.Column="1" Margin="2"/>
+
+        <Label Content="Tock geluid" Grid.Row="1"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" Margin="2"/>
+    </Grid>
+</mahApps:MetroWindow>

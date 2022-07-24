@@ -1,0 +1,114 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mahApps="http://metro.mahapps.com/winfx/xaml/controls"
+                    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                    xmlns:converters="clr-namespace:DrumTrainer.Converters"
+                    xmlns:entities="clr-namespace:DrumTrainer.Core.Entities;assembly=DrumTrainer.Core"
+                    xmlns:local="clr-namespace:DrumTrainer.Controls">
+    <ControlTemplate x:Key="DrumFullNote" TargetType="{x:Type local:NoteControl}">
+        <Canvas Width="15">
+            <local:NoteStickControl Canvas.Left="11" Note="{Binding Note, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Visibility="{Binding HideStick, Converter={converters:BoolToVisibilityInversedConverter}, RelativeSource={RelativeSource TemplatedParent}}"
+                                    MusicMeasure="{Binding MusicMeasure, RelativeSource={RelativeSource TemplatedParent}}"/>
+            <Ellipse  Fill="{Binding Foreground, RelativeSource={RelativeSource  AncestorType=local:NoteControl}}" Width="12" Height="10">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseUp">
+                        <i:InvokeCommandAction Command="{Binding SelectNoteCommand, RelativeSource={RelativeSource TemplatedParent}}" CommandParameter="{Binding Note, RelativeSource={RelativeSource TemplatedParent}}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <Ellipse.RenderTransform>
+                    <RotateTransform CenterX="0" CenterY="0" Angle="330" />
+                </Ellipse.RenderTransform>
+                <Canvas.Top>
+                    <MultiBinding Converter="{converters:NotePositionConverter}" ConverterParameter="y">
+                        <Binding Path="."/>
+                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource  AncestorType=Canvas}"/>
+                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource  AncestorType=Canvas}"/>
+                        <Binding Path="MusicMeasure" RelativeSource="{RelativeSource  AncestorType=local:NoteControl}"/>
+                    </MultiBinding>
+                </Canvas.Top>
+            </Ellipse>
+        </Canvas>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="OpenHihat" TargetType="{x:Type local:NoteControl}">
+        <Canvas Width="20" >
+            <local:NoteStickControl   Visibility="{Binding HideStick, Converter={converters:BoolToVisibilityInversedConverter}, RelativeSource={RelativeSource TemplatedParent}}"  Canvas.Left="11" Note="{Binding Note, RelativeSource={RelativeSource TemplatedParent}}" MusicMeasure="{Binding MusicMeasure, RelativeSource={RelativeSource TemplatedParent}}"/>
+
+            <Grid Canvas.Left="-5">
+                <Canvas.Top>
+                    <MultiBinding Converter="{converters:NotePositionConverter}" ConverterParameter="y">
+                        <Binding Path="."/>
+                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource  AncestorType=Canvas}"/>
+                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource  AncestorType=Canvas}"/>
+                        <Binding Path="MusicMeasure" RelativeSource="{RelativeSource  AncestorType=local:NoteControl}"/>
+                    </MultiBinding>
+                </Canvas.Top>
+                <Ellipse Fill="Transparent" Width="18" Height="18" StrokeThickness="2" Stroke="{Binding Foreground, RelativeSource={RelativeSource  AncestorType=local:NoteControl}}"/>
+                <TextBlock FontSize="14"  Text="X" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,2">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseUp">
+                        <i:InvokeCommandAction Command="{Binding SelectNoteCommand, RelativeSource={RelativeSource TemplatedParent}}" CommandParameter="{Binding Note, RelativeSource={RelativeSource TemplatedParent}}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                </TextBlock>
+            </Grid>
+
+        </Canvas>
+    </ControlTemplate>
+    <ControlTemplate x:Key="ClosedHihat" TargetType="{x:Type local:NoteControl}">
+        <Canvas Width="15" >
+            <local:NoteStickControl   Visibility="{Binding HideStick, Converter={converters:BoolToVisibilityInversedConverter}, RelativeSource={RelativeSource TemplatedParent}}"  Canvas.Left="11" Note="{Binding Note, RelativeSource={RelativeSource TemplatedParent}}" MusicMeasure="{Binding MusicMeasure, RelativeSource={RelativeSource TemplatedParent}}"/>
+            <TextBlock FontSize="14" Canvas.Left="3" Text="X" FontWeight="Bold">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseUp">
+                        <i:InvokeCommandAction Command="{Binding SelectNoteCommand, RelativeSource={RelativeSource TemplatedParent}}" CommandParameter="{Binding Note, RelativeSource={RelativeSource TemplatedParent}}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                 <Canvas.Top>
+                    <MultiBinding Converter="{converters:NotePositionConverter}" ConverterParameter="y">
+                        <Binding Path="."/>
+                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource  AncestorType=Canvas}"/>
+                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource  AncestorType=Canvas}"/>
+                        <Binding Path="MusicMeasure" RelativeSource="{RelativeSource  AncestorType=local:NoteControl}"/>
+                    </MultiBinding>
+                  </Canvas.Top>
+            </TextBlock>
+        </Canvas>
+    </ControlTemplate>
+
+
+
+
+    <Style TargetType="{x:Type local:NoteControl}">
+        <Setter Property="Template" Value="{StaticResource DrumFullNote}"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Note.Drum,  RelativeSource={RelativeSource Self}}" Value="{x:Static entities:Drum.Snare}">
+                <DataTrigger.Setters>
+                    <Setter Property="Template" Value="{StaticResource DrumFullNote}"/>
+                </DataTrigger.Setters>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Note.Drum,  RelativeSource={RelativeSource Self}}" Value="{x:Static entities:Drum.ClosedHihat}">
+                <DataTrigger.Setters>
+                    <Setter Property="Template" Value="{StaticResource ClosedHihat}"/>
+                </DataTrigger.Setters>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Note.Drum,  RelativeSource={RelativeSource Self}}" Value="{x:Static entities:Drum.RightBase}">
+                <DataTrigger.Setters>
+                    <Setter Property="Template" Value="{StaticResource DrumFullNote}"/>
+                </DataTrigger.Setters>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Note.Drum,  RelativeSource={RelativeSource Self}}" Value="{x:Static entities:Drum.OpenHihat}">
+                <DataTrigger.Setters>
+                    <Setter Property="Template" Value="{StaticResource OpenHihat}"/>
+                </DataTrigger.Setters>
+            </DataTrigger>
+
+
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

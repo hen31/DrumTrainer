@@ -1,0 +1,112 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mahApps="http://metro.mahapps.com/winfx/xaml/controls"
+                    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                    xmlns:entities="clr-namespace:DrumTrainer.Core.Entities;assembly=DrumTrainer.Core"
+                    xmlns:converters="clr-namespace:DrumTrainer.Converters"
+                    xmlns:local="clr-namespace:DrumTrainer.Controls">
+    <ControlTemplate x:Key="QuaterNote" TargetType="{x:Type local:NoteStickControl}">
+        <Rectangle Fill="Black" Width="2" Height="33"/>
+    </ControlTemplate>
+
+
+    <ControlTemplate x:Key="EightNote" TargetType="{x:Type local:NoteStickControl}">
+        <Canvas Width="{x:Static local:DrumTrainerControlSetting.NoteBarWidth}" Height="{x:Static local:DrumTrainerControlSetting.NoteStickHeight}">
+            <Rectangle Fill="{Binding Foreground, RelativeSource={RelativeSource  AncestorType=local:NoteStickControl}}" Width="1" Height="{Binding Note.Drum, RelativeSource={RelativeSource AncestorType=local:NoteStickControl}, Converter={converters:DrumToStickHeightConverter}}"/>
+            <Rectangle Fill="{Binding Foreground, RelativeSource={RelativeSource  AncestorType=local:NoteStickControl}}" Width="{x:Static local:DrumTrainerControlSetting.NoteBarWidth}" Height="5">
+                <Rectangle.Visibility>
+                    <MultiBinding Converter="{converters:IsLastNoteInBeatConverter}" ConverterParameter="x">
+                        <Binding Path="Note" RelativeSource="{RelativeSource AncestorType=local:NoteStickControl}"/>
+                        <Binding Path="MusicMeasure" RelativeSource="{RelativeSource AncestorType=local:NoteStickControl}"/>
+                    </MultiBinding>
+                </Rectangle.Visibility>
+            </Rectangle>
+        </Canvas>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="SixteenthNote" TargetType="{x:Type local:NoteStickControl}">
+        <Canvas Width="{x:Static local:DrumTrainerControlSetting.NoteBarWidth}" Height="{x:Static local:DrumTrainerControlSetting.NoteStickHeight}">
+            <Rectangle Fill="{Binding Foreground, RelativeSource={RelativeSource  AncestorType=local:NoteStickControl}}" Width="1" Height="{Binding Note.Drum, RelativeSource={RelativeSource AncestorType=local:NoteStickControl}, Converter={converters:DrumToStickHeightConverter}}"/>
+            <Rectangle Fill="{Binding Foreground, RelativeSource={RelativeSource  AncestorType=local:NoteStickControl}}" Width="{x:Static local:DrumTrainerControlSetting.NoteBarWidth}" Height="5">
+                <Rectangle.Visibility>
+                    <MultiBinding Converter="{converters:IsLastNoteInBeatConverter}" ConverterParameter="x">
+                        <Binding Path="Note" RelativeSource="{RelativeSource AncestorType=local:NoteStickControl}"/>
+                        <Binding Path="MusicMeasure" RelativeSource="{RelativeSource AncestorType=local:NoteStickControl}"/>
+                    </MultiBinding>
+                </Rectangle.Visibility>
+            </Rectangle>
+            <Rectangle Fill="{Binding Foreground, RelativeSource={RelativeSource  AncestorType=local:NoteStickControl}}" Width="{x:Static local:DrumTrainerControlSetting.NoteBarWidth}" Height="5" Canvas.Top="10">
+                <Rectangle.Visibility>
+                    <MultiBinding Converter="{converters:IsLastNoteInBeatConverter}" ConverterParameter="x">
+                        <Binding Path="Note" RelativeSource="{RelativeSource AncestorType=local:NoteStickControl}"/>
+                        <Binding Path="MusicMeasure" RelativeSource="{RelativeSource AncestorType=local:NoteStickControl}"/>
+                    </MultiBinding>
+                </Rectangle.Visibility>
+            </Rectangle>
+        </Canvas>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ThirtySecond" TargetType="{x:Type local:NoteStickControl}">
+        <Canvas Width="{x:Static local:DrumTrainerControlSetting.NoteBarWidth}" Height="{x:Static local:DrumTrainerControlSetting.NoteStickHeight}">
+            <Rectangle Fill="{Binding Foreground, RelativeSource={RelativeSource  AncestorType=local:NoteStickControl}}" Width="1" Height="{Binding Note.Drum, RelativeSource={RelativeSource AncestorType=local:NoteStickControl}, Converter={converters:DrumToStickHeightConverter}}"/>
+            <Rectangle Fill="{Binding Foreground, RelativeSource={RelativeSource  AncestorType=local:NoteStickControl}}" Width="{x:Static local:DrumTrainerControlSetting.NoteBarWidth}" Height="5">
+                <Rectangle.Visibility>
+                    <MultiBinding Converter="{converters:IsLastNoteInBeatConverter}" ConverterParameter="x">
+                        <Binding Path="Note" RelativeSource="{RelativeSource AncestorType=local:NoteStickControl}"/>
+                        <Binding Path="MusicMeasure" RelativeSource="{RelativeSource AncestorType=local:NoteStickControl}"/>
+                    </MultiBinding>
+                </Rectangle.Visibility>
+            </Rectangle>
+            <Rectangle Fill="{Binding Foreground, RelativeSource={RelativeSource  AncestorType=local:NoteStickControl}}" Width="{x:Static local:DrumTrainerControlSetting.NoteBarWidth}" Height="5" Canvas.Top="10">
+                <Rectangle.Visibility>
+                    <MultiBinding Converter="{converters:IsLastNoteInBeatConverter}" ConverterParameter="x">
+                        <Binding Path="Note" RelativeSource="{RelativeSource AncestorType=local:NoteStickControl}"/>
+                        <Binding Path="MusicMeasure" RelativeSource="{RelativeSource AncestorType=local:NoteStickControl}"/>
+                    </MultiBinding>
+                </Rectangle.Visibility>
+            </Rectangle>
+
+            <Rectangle Fill="{Binding Foreground, RelativeSource={RelativeSource  AncestorType=local:NoteStickControl}}" Width="{x:Static local:DrumTrainerControlSetting.NoteBarWidth}" Height="5" Canvas.Top="20">
+                <Rectangle.Visibility>
+                    <MultiBinding Converter="{converters:IsLastNoteInBeatConverter}" ConverterParameter="x">
+                        <Binding Path="Note" RelativeSource="{RelativeSource AncestorType=local:NoteStickControl}"/>
+                        <Binding Path="MusicMeasure" RelativeSource="{RelativeSource AncestorType=local:NoteStickControl}"/>
+                    </MultiBinding>
+                </Rectangle.Visibility>
+            </Rectangle>
+        </Canvas>
+    </ControlTemplate>
+    
+
+    <Style TargetType="{x:Type local:NoteStickControl}">
+        <Setter Property="Template" Value="{StaticResource QuaterNote}"/>
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Note.NoteType, RelativeSource={RelativeSource Self}}" Value="{x:Static entities:NoteType.Quater}">
+                <DataTrigger.Setters>
+                    <Setter Property="Template" Value="{StaticResource QuaterNote}"/>
+                </DataTrigger.Setters>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Note.NoteType,  RelativeSource={RelativeSource Self}}" Value="{x:Static entities:NoteType.Eight}">
+                <DataTrigger.Setters>
+                    <Setter Property="Template" Value="{StaticResource EightNote}"/>
+                </DataTrigger.Setters>
+            </DataTrigger>
+
+
+            <DataTrigger Binding="{Binding Note.NoteType,  RelativeSource={RelativeSource Self}}" Value="{x:Static entities:NoteType.Sixteenth}">
+                <DataTrigger.Setters>
+                    <Setter Property="Template" Value="{StaticResource SixteenthNote}"/>
+                </DataTrigger.Setters>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Note.NoteType,  RelativeSource={RelativeSource Self}}" Value="{x:Static entities:NoteType.ThirtySecond}">
+                <DataTrigger.Setters>
+                    <Setter Property="Template" Value="{StaticResource ThirtySecond}"/>
+                </DataTrigger.Setters>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,80 @@
+﻿<childWindow:ChildWindow x:Class="DrumTrainer.SearchSpotifyView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mahApps="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DrumTrainer"
+        xmlns:childWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
+        mc:Ignorable="d"
+                     xmlns:iconPack="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                         
+        Title="Midi instellingen" >
+    <Grid Width="500" Height="600">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Zoeken" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" Margin="2" Text="{Binding SearchText}"/>
+        <Button Margin="2" Grid.Column="2" Command="{Binding SearchCommand}" Style="{DynamicResource MahApps.Styles.Button.Square}">
+            <iconPack:FontAwesome Kind="SearchSolid"/>
+        </Button>
+
+        <GroupBox Grid.Row="1" Grid.ColumnSpan="3" Header="Zoek resultaten">
+            <DataGrid IsReadOnly="True"
+                      SelectionMode="Single"
+                      SelectionUnit="FullRow"
+                      AutoGenerateColumns="False" ItemsSource="{Binding ResultItems}" SelectedItem="{Binding SelectedItem}">
+                <DataGrid.Resources>
+                    <Style  TargetType="{x:Type DataGridCell}" >
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.RowStyle>
+                    <Style  TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
+                        <Setter Property="local:DataGridBehaviour.DoubleClickCommand" Value="{Binding Path=DataContext.SelectCommand, RelativeSource={RelativeSource AncestorType=childWindow:ChildWindow}}"/>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="2*" Header="Titel" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Width="2*" Header="Artiest" Binding="{Binding Artists[0].Name}"/>
+                    <DataGridTextColumn Width="1*" Header="Album" Binding="{Binding Album.Name}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <!--  <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="-"/>
+                            <TextBlock Text="{Binding Artists[0].Name}"/>
+                            <TextBlock Text="; "/>
+                            <TextBlock Text="{Binding Album.Name}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>-->
+        <Grid Grid.Row="2" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Sluiten" Margin="2" Command="{Binding CancelCommand}" Style="{DynamicResource MahApps.Styles.Button.Square}" />
+
+            <Button Content="Selecteren" Grid.Column="2" Margin="2" Command="{Binding SelectCommand}" Style="{DynamicResource MahApps.Styles.Button.AccentedSquare}" />
+        </Grid>
+    </Grid>
+</childWindow:ChildWindow>

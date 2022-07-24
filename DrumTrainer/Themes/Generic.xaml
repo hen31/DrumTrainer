@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:DrumTrainer.Themes">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Themes/MetronomeControl.xaml"/>
+        <ResourceDictionary Source="Themes/TimelineControl.xaml"/>
+        <ResourceDictionary Source="Themes/NoteControl.xaml"/>
+        <ResourceDictionary Source="Themes/NoteStickControl.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

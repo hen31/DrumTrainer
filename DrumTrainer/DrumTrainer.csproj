@@ -1,0 +1,78 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MahApps.Metro" Version="2.0.0-alpha0660" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="3.0.0-alpha0270" />
+    <PackageReference Include="MahApps.Metro.SimpleChildWindow" Version="2.0.0-alpha0032" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.3" />
+    <PackageReference Include="NAudio" Version="1.9.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DrumTrainer.Core\DrumTrainer.Core.csproj" />
+    <ProjectReference Include="..\DrumTrainer.Spotify\DrumTrainer.Spotify.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="EditMeasureView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="SearchSpotifyView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MidiSettingsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Properties\DrumTrainer.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DrumTrainer.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Audio\click.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Audio\click2.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Properties\DrumTrainer.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>DrumTrainer.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="EditMeasureView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="SearchSpotifyView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MidiSettingsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\NoteControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\NoteStickControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\TimelineControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>
